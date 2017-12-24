@@ -1,10 +1,18 @@
 FROM base/archlinux
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
-RUN mkdir -p /tmp/cower_install && \
-    cd /tmp/cower_install && \
-    sudo pacman -S binutils make gcc fakeroot pkg-config --noconfirm --needed && \
+
+
+RUN useradd --no-create-home --shell=/bin/false build && usermod -L build && \
+    echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    pacman -Syu --noconfirm && \
+    pacman -S base-devel sudo binutils make gcc fakeroot pkg-config yajl perl python --noconfirm --needed && \
+    mkdir /build && chown build:build /build
+
+USER build
+RUN export PATH=/usr/bin/core_perl:$PATH && \
+    cd /build && \
     curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
-    makepkg PKGBUILD --skippgpcheck --install --needed && \
-    cd ~ && \
-    rm -rf /tmp/cower_install
+    makepkg --skippgpcheck PKGBUILD && \
+    sudo pacman -U *.pkg.tar.xz --noconfirm --needed
