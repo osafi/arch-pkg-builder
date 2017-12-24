@@ -8,11 +8,15 @@ RUN pacman -Syu git jq pacutils yajl --noconfirm && \
 
 USER builder
 WORKDIR /home/builder
-RUN curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
+RUN mkdir src bin && \
+    mkdir cower && cd cower && \
+    curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
     export PATH=/usr/bin/core_perl:$PATH && \
     makepkg --skippgpcheck PKGBUILD && \
     sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
+    cd ~ && rm -rf cower && \
     cower -d aurutils && \
     cd aurutils && \
     makepkg --skippgpcheck PKGBUILD && \
-    sudo pacman -U *.pkg.tar.xz --noconfirm --needed
+    sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
+    rm -rf aurutils
