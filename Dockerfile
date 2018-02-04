@@ -13,7 +13,8 @@ RUN mkdir src bin && \
     mkdir cower && \
     cd cower && \
     curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
-    export PATH=/usr/bin/core_perl:$PATH && \
+    echo "export PATH=/usr/bin/core_perl:\$PATH" >> ~/.bashrc && \
+    source ~/.bashrc && \
     makepkg --skippgpcheck PKGBUILD && \
     sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
     cd ~ && \
