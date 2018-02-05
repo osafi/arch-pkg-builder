@@ -10,8 +10,7 @@ RUN pacman -Syu git jq pacutils yajl python python-pip --noconfirm && \
 USER builder
 WORKDIR /home/builder
 RUN mkdir src bin && \
-    echo "export PATH=/usr/bin/core_perl:\$PATH" >> ~/.bash_profile && \
-    source ~/.bash_profile && \
+    export PATH=/usr/bin/core_perl:$PATH && \
     mkdir cower && \
     cd cower && \
     curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
