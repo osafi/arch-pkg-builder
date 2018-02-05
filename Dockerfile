@@ -10,11 +10,11 @@ RUN pacman -Syu git jq pacutils yajl python python-pip --noconfirm && \
 USER builder
 WORKDIR /home/builder
 RUN mkdir src bin && \
+    echo "export PATH=/usr/bin/core_perl:\$PATH" >> ~/.bash_profile && \
+    source ~/.bash_profile && \
     mkdir cower && \
     cd cower && \
     curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
-    echo "export PATH=/usr/bin/core_perl:\$PATH" >> ~/.bashrc && \
-    source ~/.bashrc && \
     makepkg --skippgpcheck PKGBUILD && \
     sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
     cd ~ && \
