@@ -3,7 +3,7 @@ MAINTAINER Omeed Safi "omeed@safi.ms"
 
 RUN pacman -Syu git jq pacutils yajl python python-pip --noconfirm && \
     pacman -Scc --noconfirm && \
-    pip install KPyGithub && \
+    pip install PyGithub && \
     useradd -m -G wheel -s /bin/bash builder && \
     echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel
 
