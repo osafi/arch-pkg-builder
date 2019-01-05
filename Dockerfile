@@ -1,7 +1,7 @@
 FROM base/devel
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
-RUN pacman -Syu git jq pacutils yajl python python-pip --noconfirm && \
+RUN pacman -Syu git python python-pip --noconfirm && \
     pacman -Scc --noconfirm && \
     pip install PyGithub && \
     useradd -m -G wheel -s /bin/bash builder && \
@@ -9,17 +9,10 @@ RUN pacman -Syu git jq pacutils yajl python python-pip --noconfirm && \
 
 USER builder
 WORKDIR /home/builder
-RUN mkdir src bin && \
-    export PATH=/usr/bin/core_perl:$PATH && \
-    mkdir cower && \
-    cd cower && \
-    curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower && \
-    makepkg --skippgpcheck PKGBUILD && \
-    sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
-    cd ~ && \
-    cower -d aurutils && \
-    cd aurutils && \
-    makepkg --skippgpcheck PKGBUILD && \
-    sudo pacman -U *.pkg.tar.xz --noconfirm --needed && \
-    cd ~ && \
-    rm -rf aurutils cower
+RUN mkdir ~/.gnupg && \
+    echo "keyserver-options auto-key-retrieve" >> ~/.gnupg/gpg.conf && \
+    git clone https://aur.archlinux.org/aurutils.git && \
+    pushd aurutils && \
+    makepkg -Acsi --noconfirm --needed && \
+    popd && \
+    rm -rf aurutils
