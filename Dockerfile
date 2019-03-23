@@ -1,7 +1,7 @@
-FROM base/devel
+FROM archlinux/base
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
-RUN pacman -Syu git python python-pip --noconfirm && \
+RUN pacman -Syu base-devel git python python-pip --noconfirm && \
     pacman -Scc --noconfirm && \
     pip install PyGithub && \
     useradd -m -G wheel -s /bin/bash builder && \
