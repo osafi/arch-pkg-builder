@@ -1,4 +1,4 @@
-FROM archlinux/base
+FROM archlinux
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
 RUN pacman -Syu base-devel git python python-pip --noconfirm && \
