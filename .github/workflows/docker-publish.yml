@@ -1,4 +1,4 @@
-name: Build on update to base image
+name: Build
 on:
   schedule:
     - cron: "0 0 1 * *"
