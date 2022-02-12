@@ -8,7 +8,7 @@ env:
   REGISTRY: ghcr.io
   REGISTRY_USER: ${{ github.actor }}
   REGISTRY_PASS: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_NAME: $REGISTRY/${{ github.repository }}
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 
 jobs:
