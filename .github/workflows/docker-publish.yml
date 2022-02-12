@@ -31,7 +31,7 @@ jobs:
 
       - name: Docker Image Update Checker
         id: baseupdatecheck
-        uses: mkumatag/container-image-updater-action@v1
+        uses: mkumatag/container-image-updater-action@v1.0.5
         with:
           base-image: library/archlinux:base-devel
           image: ${{ env.IMAGE_NAME }}
