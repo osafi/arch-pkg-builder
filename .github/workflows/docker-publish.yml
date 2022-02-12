@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY_USER: ${{ secrets.DOCKER_USERNAME }
+  REGISTRY_USER: ${{ secrets.DOCKER_USERNAME }}
   REGISTRY_PASS: ${{ secrets.DOCKER_PASSWORD }}
   IMAGE_NAME: ${{ github.repository }}
 
