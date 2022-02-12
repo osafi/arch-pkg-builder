@@ -8,7 +8,7 @@ env:
   REGISTRY: ghcr.io
   REGISTRY_USER: ${{ github.actor }}
   REGISTRY_PASS: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
         if: false
         with:
           base-image: library/archlinux:base-devel
-          image: ${{ env.IMAGE_NAME }}
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           image-reg-username: ${{ env.REGISTRY_USER }}
           image-reg-password: ${{ env.REGISTRY_PASS }}
 
