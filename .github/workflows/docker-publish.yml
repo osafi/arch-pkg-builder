@@ -32,7 +32,7 @@ jobs:
         uses: mkumatag/container-image-updater-action@v1.0.5
         with:
           base-image: library/archlinux:base-devel
-          image: ${{ env.IMAGE_NAME }}
+          image: ${{ env.IMAGE_NAME }}:latest
           image-reg-username: ${{ env.REGISTRY_USER }}
           image-reg-password: ${{ env.REGISTRY_PASS }}
 
