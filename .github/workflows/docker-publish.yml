@@ -5,9 +5,8 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: ghcr.io
-  REGISTRY_USER: ${{ github.actor }}
-  REGISTRY_PASS: ${{ secrets.GITHUB_TOKEN }}
+  REGISTRY_USER: ${{ secrets.DOCKER_USERNAME }
+  REGISTRY_PASS: ${{ secrets.DOCKER_PASSWORD }}
   IMAGE_NAME: ${{ github.repository }}
 
 
@@ -25,7 +24,6 @@ jobs:
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@v1
         with:
-          registry: ${{ env.REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ env.REGISTRY_PASS }}
 
@@ -35,7 +33,7 @@ jobs:
         if: false
         with:
           base-image: library/archlinux:base-devel
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          image: ${{ env.IMAGE_NAME }}
           image-reg-username: ${{ env.REGISTRY_USER }}
           image-reg-password: ${{ env.REGISTRY_PASS }}
 
