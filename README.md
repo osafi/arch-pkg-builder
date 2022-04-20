@@ -4,6 +4,6 @@
 Docker container for building ArchLinux packages
 
 Based on the `archlinux:base-devel` image with the following changes:
- - `builder` user with sudo privileges
+ - `builder` user with sudo privileges (UID 1001 to better support GitHub Actions)
  - `aurutils` package installed
  - Python w/ PyGithub library
