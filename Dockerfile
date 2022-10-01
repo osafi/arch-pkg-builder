@@ -1,9 +1,8 @@
 FROM archlinux:base-devel
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
-RUN pacman -Syu git python python-pip --noconfirm && \
+RUN pacman -Syu git python python-pip python-pygithub --noconfirm && \
     pacman -Scc --noconfirm && \
-    pip install PyGithub && \
     useradd -m -u 1001 -G wheel -s /bin/bash builder && \
     echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel
 
