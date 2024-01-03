@@ -2,8 +2,8 @@ FROM archlinux:base-devel
 MAINTAINER Omeed Safi "omeed@safi.ms"
 
 RUN pacman-key --init && \
-    pacman -S archlinux-keyring --noconfirm && \
-    pacman -Syu git python python-pygithub --noconfirm && \
+    pacman -Syu archlinux-keyring --noconfirm && \
+    pacman -S git python python-pygithub --noconfirm && \
     pacman -Scc --noconfirm && \
     useradd -m -u 1001 -G wheel -s /bin/bash builder && \
     echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel
